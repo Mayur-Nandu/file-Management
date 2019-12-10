@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+
+  form(action='/upload' method="POST" enctype="multipart/form-data")
+      .row
+        .col.s12
+          if msg ==1
+            .success
+              | Photo uploaded successfully
+          else if msg == 2
+            .error
+              | File size too large
+          else if msg == 3
+            .error
+              | Invalid file type. Only JPG, PNG or GIF file are allowed.      
+      .row
+        .col.s12 
+          .file-field.input-field
+            .btn.grey
+              span File
+              input(type='file' name="photo" required)
+            .file-path-wrapper
+              input.file-path.validate(type='text' )
+
+      .row
+        .col.s12 
+          button.btn.waves-effect.waves-light(type='submit', name='action')
+            | Upload
+            i.material-icons.right send
