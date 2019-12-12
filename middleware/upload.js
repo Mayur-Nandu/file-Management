@@ -20,7 +20,7 @@ const storage = new GridFsStorage({
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads',
-          metadata: req.body.email
+          metadata: req.user.email
         };
         resolve(fileInfo);
     });

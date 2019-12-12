@@ -29,13 +29,17 @@ router.post("/signup", async (req, res) => {
     name: user.name,
     email: user.email
   });
+
+  // res.status(200).send(token);
 });
 
 router.post("/login", async (req, res) => {
-
   // validate the request body first
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    // console.log(error)   ;
+    return res.status(400).send(error.details[0].message);
+  }
 
   //find an existing user
 
@@ -49,12 +53,14 @@ router.post("/login", async (req, res) => {
     if(result){
       console.log("Password Matched");
       const token = user.generateAuthToken();
-      res.header("x-auth-token", token).send('welcome ' + user.name);
+      res.header("x-auth-token", token).status(200).send('OK');
+      // res.status(200).send(token);
     }
     else{
       console.log("wrong Password");
       const token = user.generateAuthToken();
       res.status(400).send("invalid password");
+      // res.status(400).send("invalid request");
     }
 
   });
