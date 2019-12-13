@@ -22,14 +22,7 @@ router.post("/signup", async (req, res) => {
   });
   user.password = await bcrypt.hash(user.password, 10);
   await user.save();
-
-  const token = user.generateAuthToken();
-  res.header("x-auth-token", token).send({
-    _id: user._id,
-    name: user.name,
-    email: user.email
-  });
-
+  res.status(200).send("user created");
   // res.status(200).send(token);
 });
 
@@ -42,7 +35,6 @@ router.post("/login", async (req, res) => {
   }
 
   //find an existing user
-
   let user = await User.findOne({ email: req.body.email});
   if (!user) return res.status(400).send("sign in First");
   bcrypt.compare(req.body.password, user.password, function(err, result) {
