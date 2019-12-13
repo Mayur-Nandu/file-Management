@@ -1,7 +1,6 @@
 let  multer = require('multer');
 const config = require('config');
 const GridFsStorage = require('multer-gridfs-storage');
-// const gfs =require('./gfs');
 const Grid = require('gridfs-stream');
 const mongoose= require('mongoose');
 const conn = require('../connection/MongooseConnection');
@@ -30,5 +29,11 @@ const storage = new GridFsStorage({
 
 
 
-const upload = multer({ storage });
-module.exports = upload;
+const UploadWithStorage = multer({ storage });
+const  Upload= multer();
+// module.exports = UploadWithStorage;
+
+module.exports = {
+  Upload,
+  UploadWithStorage
+}
