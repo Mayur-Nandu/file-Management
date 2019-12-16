@@ -16,7 +16,7 @@ const storage = new GridFsStorage({
   url: config.get('mongoURI'),
   file  : (req, file) => {
     return new Promise((resolve, reject) => {
-        const filename = file.originalname;
+        const filename = Date.now() + file.originalname;
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads',

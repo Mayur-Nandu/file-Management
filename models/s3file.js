@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 //simple schema
 const s3FileSchema = new mongoose.Schema({
-  fileName : {
+  LocationUrl: {
     type:String,
     required:true,
     unique : true
@@ -12,8 +12,7 @@ const s3FileSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 5,
-    maxlength: 255,
-    unique: true
+    maxlength: 255
   }
 });
 
